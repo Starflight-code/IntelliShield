@@ -4,7 +4,7 @@ class AuthManager {
     this.sessionExpiryDays = 7;
     
     this.testCredentials = { // Over here we have our hardcoded credentials to test the login functionality
-      'user': 'testpass'
+      'user@123.com': 'testpass'
     };
     
     this.activeSessions = new Map();
@@ -76,38 +76,38 @@ class AuthManager {
   handleLogin(event) {
     event.preventDefault();
     
-    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('errorMessage');
     
     errorMessage.classList.add('d-none');
     
-    if (this.validateCredentials(username, password)) {
-      this.createSession(username);
+    if (this.validateCredentials(email, password)) {
+      this.createSession(email);
       this.redirectAfterLogin();
     } else {
-      this.showError('Invalid username or password');
+      this.showError('Invalid email or password');
     }
   }
   
-  validateCredentials(username, password) {
-    return this.testCredentials[username] === password;
+  validateCredentials(email, password) {
+    return this.testCredentials[email] === password;
   }
   
-  createSession(username) {
+  createSession(email) {
     const sessionId = this.generateSessionId();
     const expires = new Date();
     expires.setTime(expires.getTime() + (this.sessionExpiryDays * 24 * 60 * 60 * 1000));
     
     this.activeSessions.set(sessionId, {
-      user: username,
+      user: email,
       created: new Date().toISOString(),
       expires: expires.toISOString()
     });
     
     this.setCookie(this.sessionCookieName, sessionId, this.sessionExpiryDays);
     
-    console.log(`Session created for user: ${username}`);
+    console.log(`Session created for user: ${email}`);
   }
   
   logout() {
