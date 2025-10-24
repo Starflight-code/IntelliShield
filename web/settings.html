@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="settings.js"></script>
+</head>
+
+
+<div class="container text-center center border mt-2 p-1">
+  <div class="row">
+    <div class="col-10">
+      <span class="align-middle text-center fs-4">Check-In</span>
+      <span class="align-middle text-center fs-6 fw-light"><br>If you're feeling unsafe, schedule an hourly check in.
+        Each hour, you'll be prompted to confirm your safety. If you miss a check in, we'll let your emergency contacts
+        know.</span>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="btn-check" id="check-in-btn" autocomplete="off">
+      <label class="btn btn-outline-primary" for="check-in-btn">Disabled</label><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <span class="align-middle text-center fs-4">Confirmation Check-In</span>
+      <span class="align-middle text-center fs-6 fw-light"><br>To prevent false alarms, we can send you a notification
+        before we reach out to your contacts. If you don't respond, we'll still reach out automatically on your
+        behalf.</span>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="btn-check" id="confirmation-check-in-btn" autocomplete="off">
+      <label class="btn btn-outline-primary" for="confirmation-check-in-btn">Disabled</label><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <span class="align-middle text-center fs-4">Location Sharing</span>
+      <span class="align-middle text-center fs-6 fw-light"><br>Share your location with people you trust. They'll be
+        able to see where you are and gain access to our suite of safety insights.</span>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="btn-check" id="location-share-btn" autocomplete="off">
+      <label class="btn btn-outline-primary" for="location-share-btn">Disabled</label><br>
+    </div>
+  </div>
+    <hr>
+
+  <div class="container">
+    <span class="text-center fs-4">My Contacts</span>
+    <span class="text-center fs-6 fw-light"><br>Your safety team. These users will be contacted if we believe you're in
+      danger.</span>
+    <ul class="list-group" id="emergency-contact-list">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <div class="container p-2 mx-auto">
+      <form class="row g-3">
+        <div class="col-6"></div>
+        <div class="col-4">
+          <input type="text" class="form-control" id="invite-username" placeholder="Username">
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-primary mb-3">Add Contact</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<body>
+
+</body>
+
+</html>
