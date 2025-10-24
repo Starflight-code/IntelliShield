@@ -49,21 +49,11 @@ const HomePage = () => {
   };
 
   const handlePanic = () => {
-    Alert.alert(
-      'Panic Button Activated',
-      'Emergency services have been notified. Help is on the way.',
-      [
-        {
-          text: 'OK',
-          style: 'default',
-        },
-      ]
-    );
+    router.push('/panic');
   };
 
   return (
     <ScrollView style={styles.container}>
-      {/* Assignment Header */}
       <View style={styles.assignmentHeader}>
         <Image
           source={require('../assets/logo.png')}
