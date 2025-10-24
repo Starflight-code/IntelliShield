@@ -1,0 +1,34 @@
+[
+  {
+    "firstName": "Alice",
+    "lastName": "West",
+    "status": "Active",
+    "lastUpdated": "2025-10-24 00:00",
+    "location": "42.736142, -90.479472"
+    "image": "./img/alice.jpg",
+    "alerts": [
+      {"type": "schedule-deviation", "severity": "low"}
+    ]
+  },
+  {
+    "firstName": "Marc",
+    "lastName": "Ruinberg",
+    "status": "Inactive",
+    "lastUpdated": "2025-10-23 00:00",
+    "location": "42.74589, -90.48868"
+    "image": "./img/marc.jpg",
+    "alerts": []
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "McWalfin",
+    "status": "Active",
+    "lastUpdated": "2025-10-24 06:00",
+    "location": "42.74063, -90.46192"
+    "image": "./img/grace.jpg",
+    "alerts": [
+      {"type": "check-in-missed", "severity": "moderate"},
+      {"type": "manual-panic-invoked", "severity": "critical"}
+    ]
+  },
+]
