@@ -52,6 +52,10 @@ const HomePage = () => {
     router.push('/panic');
   };
 
+  const handleSettings = () => {
+    router.push('/settings');
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.assignmentHeader}>
@@ -77,9 +81,9 @@ const HomePage = () => {
             <Text style={styles.crimeTime}>(Last Hour)</Text>
           </View>
           
-          <View style={styles.settingsBox}>
+          <TouchableOpacity style={styles.settingsBox} onPress={handleSettings}>
             <Text style={styles.settingsText}>Settings</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.statusBox}>
