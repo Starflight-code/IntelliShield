@@ -1,0 +1,14 @@
+[
+  {
+    "type": "schedule-deviation",
+    "severity": "low"
+  },
+  {
+    "type": "check-in-missed",
+    "severity": "moderate"
+  },
+  {
+    "type": "manual-panic-invoked",
+    "severity": "critical"
+  }
+]

@@ -56,6 +56,10 @@ const HomePage = () => {
     router.push('/settings');
   };
 
+  const handleAlerts = () => {
+    router.push('/alerts');
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.assignmentHeader}>
@@ -72,7 +76,7 @@ const HomePage = () => {
 
       <View style={styles.header}>
         <Text style={styles.title}>Home</Text>
-        
+
         <View style={styles.topRow}>
           <View style={styles.crimeMetricsBox}>
             <Text style={styles.crimeNumber}>{crimesPrevented}</Text>
@@ -80,7 +84,10 @@ const HomePage = () => {
             <Text style={styles.crimeLabel}>Prevented</Text>
             <Text style={styles.crimeTime}>(Last Hour)</Text>
           </View>
-          
+
+          <TouchableOpacity style={[styles.settingsBox, {marginRight: 10}]} onPress={handleAlerts}>
+            <Text style={styles.settingsText}>Alerts</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.settingsBox} onPress={handleSettings}>
             <Text style={styles.settingsText}>Settings</Text>
           </TouchableOpacity>
@@ -93,16 +100,16 @@ const HomePage = () => {
         <Text style={styles.panicText}>Panic</Text>
       </TouchableOpacity>
 
-         <View style={styles.mapContainer}>
-           <View style={styles.mapPlaceholder}>
-             <Text style={styles.mapPlaceholderText}>
-               {location ? 
-                 `📍 Location: ${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}` : 
-                 locationError || 'Loading location...'
-               }
-             </Text>
-           </View>
-         </View>
+      <View style={styles.mapContainer}>
+        <View style={styles.mapPlaceholder}>
+          <Text style={styles.mapPlaceholderText}>
+            {location ?
+              `📍 Location: ${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}` :
+              locationError || 'Loading location...'
+            }
+          </Text>
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -241,18 +248,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-     mapPlaceholderText: {
-       fontSize: 16,
-       color: '#666',
-       textAlign: 'center',
-       marginBottom: 8,
-     },
-     mapNote: {
-       fontSize: 12,
-       color: '#999',
-       textAlign: 'center',
-       fontStyle: 'italic',
-     },
+  mapPlaceholderText: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  mapNote: {
+    fontSize: 12,
+    color: '#999',
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
 });
 
 export default HomePage;
