@@ -52,6 +52,24 @@ class AuthManager {
     
     const session = this.activeSessions.get(sessionId);
     if (!session) {
+      const sessionData = this.getCookie('intellishield_session_data');
+      if (sessionData) {
+        try {
+          const parsedSession = JSON.parse(sessionData);
+          if (new Date() <= new Date(parsedSession.expires)) {
+            this.activeSessions.set(sessionId, parsedSession);
+            return true;
+          } else {
+            this.deleteCookie('intellishield_session_data');
+            this.deleteCookie(this.sessionCookieName);
+            return false;
+          }
+        } catch (e) {
+          this.deleteCookie('intellishield_session_data');
+          this.deleteCookie(this.sessionCookieName);
+          return false;
+        }
+      }
       this.deleteCookie(this.sessionCookieName);
       return false;
     }
@@ -59,6 +77,7 @@ class AuthManager {
     if (new Date() > new Date(session.expires)) {
       this.activeSessions.delete(sessionId);
       this.deleteCookie(this.sessionCookieName);
+      this.deleteCookie('intellishield_session_data');
       return false;
     }
     
@@ -99,13 +118,15 @@ class AuthManager {
     const expires = new Date();
     expires.setTime(expires.getTime() + (this.sessionExpiryDays * 24 * 60 * 60 * 1000));
     
-    this.activeSessions.set(sessionId, {
+    const sessionData = {
       user: email,
       created: new Date().toISOString(),
       expires: expires.toISOString()
-    });
+    };
     
+    this.activeSessions.set(sessionId, sessionData);
     this.setCookie(this.sessionCookieName, sessionId, this.sessionExpiryDays);
+    this.setCookie('intellishield_session_data', JSON.stringify(sessionData), this.sessionExpiryDays);
     
     console.log(`Session created for user: ${email}`);
   }
@@ -116,6 +137,7 @@ class AuthManager {
       this.activeSessions.delete(sessionId);
     }
     this.deleteCookie(this.sessionCookieName);
+    this.deleteCookie('intellishield_session_data');
     window.location.href = 'login.html';
   }
   
@@ -138,7 +160,7 @@ class AuthManager {
     if (returnUrl) {
       window.location.href = returnUrl;
     } else {
-      window.location.href = 'index.html';
+      window.location.href = 'dashboard.html';
     }
   }
   
