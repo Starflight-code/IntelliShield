@@ -1,66 +1,115 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
+  Dimensions,
+  Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import * as Location from 'expo-location';
+
+const { width, height } = Dimensions.get('window');
 
 const HomePage = () => {
   const router = useRouter();
+  const [location, setLocation] = useState(null);
+  const [locationError, setLocationError] = useState(null);
+  const [crimesPrevented, setCrimesPrevented] = useState(0);
 
-  const handleLogout = () => {
+  useEffect(() => {
+    getCurrentLocation();
+    generateCrimeMetrics();
+  }, []);
+
+  const getCurrentLocation = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setLocationError('Location permission denied');
+        return;
+      }
+
+      const currentLocation = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+      });
+    } catch (error) {
+      setLocationError('Unable to get location');
+    }
+  };
+
+  const generateCrimeMetrics = () => {
+    const crimes = Math.floor(Math.random() * 10) + 1;
+    setCrimesPrevented(crimes);
+  };
+
+  const handlePanic = () => {
     Alert.alert(
-      'Logout',
-      'Are you sure you want to logout?',
+      'Panic Button Activated',
+      'Emergency services have been notified. Help is on the way.',
       [
         {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Logout',
-          style: 'destructive',
-          onPress: () => {
-            router.replace('/login');
-          },
+          text: 'OK',
+          style: 'default',
         },
       ]
     );
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      {/* Assignment Header */}
+      <View style={styles.assignmentHeader}>
+        <Image
+          source={require('../assets/logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.appTitle}>IntelliShield</Text>
+        <Text style={styles.courseInfo}>Mobile Application Development</Text>
+        <Text style={styles.studentInfo}>Developed by: David and Ben</Text>
+        <Text style={styles.courseDetails}>Course: CS 3720-02 | Semester: Fall 2025</Text>
+      </View>
+
       <View style={styles.header}>
-        <Text style={styles.title}>IntelliShield</Text>
-        <Text style={styles.subtitle}>Welcome to your dashboard</Text>
-      </View>
-
-      <View style={styles.content}>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Security Status</Text>
-          <Text style={styles.cardContent}>All systems operational</Text>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Recent Activity</Text>
-          <Text style={styles.cardContent}>No recent security events</Text>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>System Health</Text>
-          <Text style={styles.cardContent}>99.9% uptime</Text>
+        <Text style={styles.title}>Home</Text>
+        
+        <View style={styles.topRow}>
+          <View style={styles.crimeMetricsBox}>
+            <Text style={styles.crimeNumber}>{crimesPrevented}</Text>
+            <Text style={styles.crimeLabel}>Crimes</Text>
+            <Text style={styles.crimeLabel}>Prevented</Text>
+            <Text style={styles.crimeTime}>(Last Hour)</Text>
+          </View>
+          
+          <View style={styles.settingsBox}>
+            <Text style={styles.settingsText}>Settings</Text>
+          </View>
         </View>
       </View>
-
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
+      <View style={styles.statusBox}>
+        <Text style={styles.statusText}>All Systems Green</Text>
       </View>
-    </View>
+      <TouchableOpacity style={styles.panicBox} onPress={handlePanic}>
+        <Text style={styles.panicText}>Panic</Text>
+      </TouchableOpacity>
+
+         <View style={styles.mapContainer}>
+           <View style={styles.mapPlaceholder}>
+             <Text style={styles.mapPlaceholderText}>
+               {location ? 
+                 `📍 Location: ${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}` : 
+                 locationError || 'Loading location...'
+               }
+             </Text>
+           </View>
+         </View>
+    </ScrollView>
   );
 };
 
@@ -68,64 +117,148 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  assignmentHeader: {
+    backgroundColor: '#ffffff',
     padding: 20,
+    paddingTop: 60,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    marginBottom: 10,
+  },
+  logo: {
+    width: width * 0.15,
+    height: width * 0.15,
+    marginBottom: 10,
+  },
+  appTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1e293b',
+    marginBottom: 8,
+  },
+  courseInfo: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#3b82f6',
+    marginBottom: 4,
+  },
+  studentInfo: {
+    fontSize: 14,
+    color: '#64748b',
+    marginBottom: 2,
+  },
+  courseDetails: {
+    fontSize: 12,
+    color: '#94a3b8',
+    textAlign: 'center',
   },
   header: {
-    alignItems: 'center',
-    marginTop: 60,
-    marginBottom: 40,
+    padding: 20,
+    paddingTop: 20,
   },
   title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+  },
+  topRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  crimeMetricsBox: {
+    backgroundColor: '#90EE90',
+    borderRadius: 12,
+    padding: 16,
+    flex: 1,
+    marginRight: 10,
+    alignItems: 'center',
+  },
+  crimeNumber: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 8,
   },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-  content: {
-    flex: 1,
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  cardContent: {
+  crimeLabel: {
     fontSize: 14,
+    color: '#333',
+    textAlign: 'center',
+  },
+  crimeTime: {
+    fontSize: 12,
     color: '#666',
+    marginTop: 4,
   },
-  footer: {
-    paddingBottom: 20,
-  },
-  logoutButton: {
-    backgroundColor: '#FF3B30',
-    borderRadius: 8,
+  settingsBox: {
+    backgroundColor: 'white',
+    borderRadius: 12,
     padding: 16,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  settingsText: {
+    fontSize: 12,
+    color: '#333',
+    textAlign: 'center',
+  },
+  statusBox: {
+    backgroundColor: '#90EE90',
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 20,
     alignItems: 'center',
   },
-  logoutButtonText: {
-    color: '#fff',
+  statusText: {
     fontSize: 16,
     fontWeight: '600',
+    color: '#333',
   },
+  panicBox: {
+    backgroundColor: '#FFB6C1',
+    borderRadius: 12,
+    padding: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  panicText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  mapContainer: {
+    height: height * 0.4,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  map: {
+    flex: 1,
+  },
+  mapPlaceholder: {
+    flex: 1,
+    backgroundColor: '#E0E0E0',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+     mapPlaceholderText: {
+       fontSize: 16,
+       color: '#666',
+       textAlign: 'center',
+       marginBottom: 8,
+     },
+     mapNote: {
+       fontSize: 12,
+       color: '#999',
+       textAlign: 'center',
+       fontStyle: 'italic',
+     },
 });
 
 export default HomePage;
