@@ -2,7 +2,6 @@ window.addEventListener("load", async () => {
   let contact_col = document.getElementById("contact-alerts-col");
   let contacts = await fetch("./static/contacts.json");
   let contacts_json = await contacts.json();
-  console.log(contacts_json);
 
   for (let contact of contacts_json) {
     for (let alert of contact["alerts"]) {
