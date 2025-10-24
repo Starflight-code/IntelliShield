@@ -10,13 +10,16 @@
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
-  <script src="settings.js"></script>
+  <script src="auth.js"></script>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">IntelliShield</a>
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="static/img/logo.png" alt="IntelliShield Logo" height="30" class="me-2">
+      IntelliShield
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,11 +37,19 @@
         <li class="nav-item">
           <a class="nav-link active" href="settings.html">Settings</a>
         </li>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="userDisplay">User</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+            </ul>
+          </li>
       </ul>
     </div>
   </div>
 </nav>
-
 
   <div class="container text-center center border mt-2 p-1">
     <div class="row">
@@ -102,6 +113,15 @@
       </div>
     </div>
   </div>
-</body>
-
-</html>
+  <script src="settings.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.authManager && window.authManager.isAuthenticated()) {
+        const user = window.authManager.getCurrentUser();
+        const userDisplay = document.getElementById('userDisplay');
+        if (userDisplay && user) {
+          userDisplay.textContent = user;
+        }
+      }
+    });
+  </script>
