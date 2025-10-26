@@ -4,7 +4,7 @@ class AuthManager {
     this.sessionExpiryDays = 7;
 
     this.testCredentials = { // Over here we have our hardcoded credentials to test the login functionality
-      'user@123.com': 'testpass'
+      'test@intellishield.com': 'password123'
     };
 
     this.activeSessions = new Map();
