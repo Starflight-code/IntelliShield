@@ -189,3 +189,13 @@ function logout() {
     window.authManager.logout();
   }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.authManager && window.authManager.isAuthenticated()) {
+    const user = window.authManager.getCurrentUser();
+    const userDisplay = document.getElementById('userDisplay');
+    if (userDisplay && user) {
+      userDisplay.textContent = user;
+    }
+  }
+});

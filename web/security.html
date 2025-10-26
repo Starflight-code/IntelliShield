@@ -11,12 +11,13 @@
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
   <script src="auth.js"></script>
+  <script defer src="security.js"></script>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="static/img/logo.png" alt="IntelliShield Logo" height="30" class="me-2">
         IntelliShield
       </a>
@@ -27,7 +28,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="dashboard.html">Home</a>
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="security.html">Security</a>
@@ -74,15 +75,3 @@
       <div class="fs-4 text-center m-2"> Contact Alerts </div>
     </div>
   </div>
-  <script src="security.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      if (window.authManager && window.authManager.isAuthenticated()) {
-        const user = window.authManager.getCurrentUser();
-        const userDisplay = document.getElementById('userDisplay');
-        if (userDisplay && user) {
-          userDisplay.textContent = user;
-        }
-      }
-    });
-  </script>
