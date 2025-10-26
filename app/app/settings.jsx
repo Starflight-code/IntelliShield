@@ -1,14 +1,10 @@
-import React, { useState, useRef } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
-  Alert,
   Dimensions,
-  Animated,
-  Br,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -98,6 +94,12 @@ const PanicButton = () => {
           <Text>Licenses</Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.back()}
+      >
+        <Text style={styles.backButtonText}>Back to Home</Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,6 @@ import {
   TextInput,
   Alert,
   Dimensions,
-  Animated,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 
