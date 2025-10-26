@@ -8,7 +8,10 @@
     "location": "42.736142, -90.479472",
     "image": "static/img/alice.jpg",
     "alerts": [
-      {"type": "schedule-deviation", "severity": "low"}
+      {
+        "type": "schedule-deviation",
+        "severity": "low"
+      }
     ]
   },
   {
@@ -30,8 +33,14 @@
     "location": "42.74063, -90.46192",
     "image": "static/img/grace.jpg",
     "alerts": [
-      {"type": "check-in-missed", "severity": "moderate"},
-      {"type": "manual-panic-invoked", "severity": "critical"}
+      {
+        "type": "check-in-missed",
+        "severity": "moderate"
+      },
+      {
+        "type": "manual-panic-invoked",
+        "severity": "critical"
+      }
     ]
   }
 ]

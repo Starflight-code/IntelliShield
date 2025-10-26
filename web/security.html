@@ -38,16 +38,17 @@
           <li class="nav-item">
             <a class="nav-link" href="settings.html">Settings</a>
           </li>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span id="userDisplay">User</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span id="userDisplay">User</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
       </div>
     </div>
   </nav>
@@ -67,7 +68,7 @@
     </div>
     <div class="col border-start" id="my-alerts-col">
       <div class="fs-4 text-center m-2"> My Alerts </div>
-        <div class="text-center">You're Caught Up.</div>
+      <div class="text-center">You're Caught Up.</div>
     </div>
     <div class="col border-start" id="contact-alerts-col">
       <div class="fs-4 text-center m-2"> Contact Alerts </div>
@@ -75,7 +76,7 @@
   </div>
   <script src="security.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       if (window.authManager && window.authManager.isAuthenticated()) {
         const user = window.authManager.getCurrentUser();
         const userDisplay = document.getElementById('userDisplay');

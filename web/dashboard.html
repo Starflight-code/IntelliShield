@@ -61,7 +61,7 @@
             <h5 class="card-title mb-0">Live Location</h5>
           </div>
           <div class="card-body p-0">
-            <iframe 
+            <iframe
               src="https://www.openstreetmap.org/export/embed.html?bbox=-90.5350685119629%2C42.70413665385325%2C-90.42177200317384%2C42.763397922531595&layer=mapnik&marker=42.733774366639075%2C-90.47842025756836"
               style="width: 100%; height: 300px; border: none;">
             </iframe>
@@ -145,8 +145,8 @@
 
   <script>
     let currentStatus = 'safe';
-    
-    document.addEventListener('DOMContentLoaded', function() {
+
+    document.addEventListener('DOMContentLoaded', function () {
       if (window.authManager && window.authManager.isAuthenticated()) {
         const user = window.authManager.getCurrentUser();
         const userDisplay = document.getElementById('userDisplay');
@@ -154,7 +154,7 @@
           userDisplay.textContent = user;
         }
       }
-      
+
       generateRandomStats();
       updateStatusButtons();
     });
@@ -162,7 +162,7 @@
     function setStatus(status) {
       currentStatus = status;
       updateStatusButtons();
-      
+
       const statusBadge = document.getElementById('statusBadge');
       if (status === 'safe') {
         statusBadge.className = 'badge bg-success fs-6';
@@ -176,7 +176,7 @@
     function updateStatusButtons() {
       const safeBtn = document.getElementById('safeBtn');
       const dangerBtn = document.getElementById('dangerBtn');
-      
+
       if (currentStatus === 'safe') {
         safeBtn.classList.add('active');
         dangerBtn.classList.remove('active');
@@ -195,12 +195,12 @@
 
     function refreshStats() {
       generateRandomStats();
-      
+
       const btn = event.target;
       const originalText = btn.innerHTML;
       btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Refreshing...';
       btn.disabled = true;
-      
+
       setTimeout(() => {
         btn.innerHTML = originalText;
         btn.disabled = false;
