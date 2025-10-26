@@ -1,6 +1,6 @@
 window.addEventListener("load", async () => {
   let people_col = document.getElementById("people-list");
-  let contacts = await fetch("./static/contacts.json");
+  let contacts = await fetch("./static/data.json");
   let contacts_json = await contacts.json();
 
   for (let contact of contacts_json) {
