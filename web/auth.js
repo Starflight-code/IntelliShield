@@ -160,7 +160,7 @@ class AuthManager {
     if (returnUrl) {
       window.location.href = returnUrl;
     } else {
-      window.location.href = 'dashboard.html';
+      window.location.href = 'index.html';
     }
   }
 
