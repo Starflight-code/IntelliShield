@@ -28,19 +28,35 @@ Intellishield provides safety through location monitoring, intensive analysis of
 
 ## Home
 
+![](./home.png){height=50%}
+
 ### Explaintation of Functionality
+
+The home screen provides a jumping off point to the rest of the system. Additonally, it shows some statistics from your area so the user can make informed choices about how safe their area is. It also shows the connection status, indicating any location or network issues preventing full app functionality.
 
 ## Panic
 
+![](./panic.png){height=50%}
+
 ### Explaintation of Functionality
+
+The panic page allows the user to manually initiate a panic alert to their family. They can supply a description and set the alert visibility. Additionally, a hold time is enforced to prevent misclicks.
 
 ## Settings
 
+![](./settings.png){height=50%}
+
 ### Explaintation of Functionality
+
+The settings page allows users to configure the notification confirmation system, safety check-ins, and web location access (for enhanced privacy). Additionally, this page allows them to suspend Safety Pro++ Membership reminders for up to 24 whole hours. Links to legal information is also included.
 
 ## Alerts
 
+![](./alerts.png){height=50%}
+
 ### Explaintation of Functionality
+
+Alerts shows what Intellishield discovered for the user and their family members. This feed provides a simple view, at a glance, of what's going on in your Intelliguard community.
 
 # AI Usage
 
