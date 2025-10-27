@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import ToggleButton from "../components/ToggleButton.jsx"
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,7 +26,7 @@ const PanicButton = () => {
   const handleHoldStart = () => {
     setIsHolding(true);
     setHoldProgress(0);
-    
+
     progressTimer.current = setInterval(() => {
       setHoldProgress(prev => {
         if (prev >= 100) {
@@ -45,7 +46,7 @@ const PanicButton = () => {
   const handleHoldEnd = () => {
     setIsHolding(false);
     setHoldProgress(0);
-    
+
     if (holdTimer.current) {
       clearTimeout(holdTimer.current);
     }
@@ -57,7 +58,7 @@ const PanicButton = () => {
   const handleSendAlert = () => {
     setIsHolding(false);
     setHoldProgress(0);
-    
+
     if (holdTimer.current) {
       clearTimeout(holdTimer.current);
     }
@@ -75,10 +76,6 @@ const PanicButton = () => {
         },
       ]
     );
-  };
-
-  const toggleConfirmAlert = () => {
-    setConfirmAlert(!confirmAlert);
   };
 
   const toggleVisibleTo = () => {
@@ -105,17 +102,7 @@ const PanicButton = () => {
         <Text style={styles.characterCount}>{message.length}/250</Text>
       </View>
 
-      <View style={styles.confirmContainer}>
-        <Text style={styles.label}>Confirm Alert</Text>
-        <TouchableOpacity
-          style={[styles.toggleButton, confirmAlert && styles.toggleButtonActive]}
-          onPress={toggleConfirmAlert}
-        >
-          <Text style={[styles.toggleText, confirmAlert && styles.toggleTextActive]}>
-            Yes
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <ToggleButton text={"Confirm Alert"} buttonText={["No", "Yes"]} state={confirmAlert} setState={setConfirmAlert} />
 
       <View style={styles.visibleContainer}>
         <Text style={styles.label}>Visible To</Text>
@@ -143,11 +130,11 @@ const PanicButton = () => {
           </Text>
           {isHolding && (
             <View style={styles.progressBar}>
-              <View 
+              <View
                 style={[
-                  styles.progressFill, 
+                  styles.progressFill,
                   { width: `${holdProgress}%` }
-                ]} 
+                ]}
               />
             </View>
           )}
