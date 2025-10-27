@@ -20,12 +20,6 @@ const alerts = () => {
         <Text style={[styles.h1, { textAlign: "center" }]}>
           Alerts
         </Text>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backButtonText}>Back to Home</Text>
-        </TouchableOpacity>
         <ScrollView>
           {alert_entries.map((alert) => {
             return (
@@ -63,16 +57,5 @@ const styles = StyleSheet.create({
   },
   h3: {
     fontSize: 18,
-  },
-  backButton: {
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#333',
   },
 });

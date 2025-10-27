@@ -153,13 +153,6 @@ const PanicButton = () => {
           )}
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
-      >
-        <Text style={styles.backButtonText}>Back to Home</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -286,17 +279,6 @@ const styles = StyleSheet.create({
   progressFill: {
     height: '100%',
     backgroundColor: '#4CAF50',
-  },
-  backButton: {
-    backgroundColor: '#ddd',
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#333',
   },
 });
 

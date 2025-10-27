@@ -4,7 +4,7 @@ const RootLayout = () => {
   return (
     <Stack
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
     >
       <Stack.Screen name="index" />
