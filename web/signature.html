@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IntelliShield - Signature Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="auth.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="myotherimages/logo.png" alt="IntelliShield Logo" height="30" class="me-2">
+        IntelliShield
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="security.html">Security</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="people.html">People</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="signature.html">Signature</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="userDisplay">User</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body p-5">
+            <div class="text-center mb-5">
+              <img src="myotherimages/logo.png" alt="IntelliShield Logo" class="mb-3" style="height: 80px;">
+              <h2 class="card-title mb-2">IntelliShield Project</h2>
+              <hr class="mx-auto" style="width: 100px; border-top: 3px solid #0d6efd; opacity: 1;">
+            </div>
+
+            <div class="text-center mb-4">
+              <h4 class="mb-3">CS3870 Secure Web Development</h4>
+              <h5 class="text-muted mb-4">Fall 2025</h5>
+              <p class="text-muted mb-4">December 2024</p>
+            </div>
+
+            <hr class="my-5">
+
+            <div class="mb-4">
+              <h5 class="text-center mb-4 text-primary">Team Members</h5>
+              <div class="list-group">
+                <div class="list-group-item">
+                  <div>
+                    <h6 class="mb-1 fw-bold">[Your Name Here]</h6>
+                    <small class="text-muted">[your.email@university.edu]</small>
+                  </div>
+                </div>
+                <div class="list-group-item">
+                  <div>
+                    <h6 class="mb-1 fw-bold">[David Touray]</h6>
+                    <small class="text-muted">[tourayd@uwplatt.edu]</small>
+                  </div>
+                </div>
+                <div class="list-group-item">
+                  <div>
+                    <h6 class="mb-1 fw-bold">[Ben Kobiske]</h6>
+                    <small class="text-muted">[email-here]</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-5">
+
+            <div class="text-center">
+              <p class="text-muted mb-0">
+                <small>This project demonstrates the development of a secure web application
+                  for personal safety and emergency response.</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
