@@ -48,7 +48,7 @@ The panic page allows the user to manually initiate a panic alert to their famil
 
 ### Explaintation of Functionality
 
-The settings page allows users to configure the notification confirmation system, safety check-ins, and web location access (for enhanced privacy). Additionally, this page allows them to suspend Safety Pro++ Membership reminders for up to 24 whole hours. Links to legal information is also included.
+The settings page allows users to configure the notification confirmation system, safety check-ins, and web location access (for enhanced privacy). Additionally, this page allows them to suspend Safety Pro++ Membership reminders for up to 24 whole hours. Links to legal information are also included.
 
 ## Alerts
 
@@ -76,9 +76,6 @@ I asked chat gpt how to implement a hold-to-activate button with progress bar in
 
 
 This code helped us implement the crucial hold-to-activate functionality for the panic button, preventing accidental emergency alerts. The solution uses both a visual progress bar (updated every 100ms) and a 5-second timeout, giving users clear feedback that they need to hold the button.
-
-## Screenshots & Explainations
-
 
 # Reflection
 
