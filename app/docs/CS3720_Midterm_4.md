@@ -44,4 +44,8 @@
 
 ## Learning Areas
 
+This assignment assisted us with solidifying our knowledge of component based abstraction and the application of DRY principles in the React ecosystem. Additionally, we learned to work around the querks in React, React Native, and Expo Router. 
+
 ## Planned Improvements for Final Project
+
+We plan to add server connectivity and better support for location monitoring (this isn't practical without a server to aggregate information). Additionally, we expect to implement improved lazy loading, data caching, and some more practical cache invalidation schemes to compliment the added networking functionality. 
