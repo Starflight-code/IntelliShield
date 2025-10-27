@@ -4,14 +4,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
-import { useRouter } from 'expo-router';
 
-const { width, height } = Dimensions.get('window');
 
 const PanicButton = () => {
-  const router = useRouter();
   const [sendNotificationBeforeAlert, setSendNotificationBeforeAlert] = useState(false);
   const [safetyCheckIns, setSafetyCheckIns] = useState(false);
   const [webLocationAccess, setWebLocationAccess] = useState(false);

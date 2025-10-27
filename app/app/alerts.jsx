@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import alert_entries from '../assets/alert_entries'
-import { useRouter } from 'expo-router'
 
 function AlertCard({ type, severity, use_key }) {
   return (<View key={use_key} style={styles.wrapper}>
@@ -13,7 +12,6 @@ function AlertCard({ type, severity, use_key }) {
 
 const alerts = () => {
   let iter = 0;
-  let router = useRouter();
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.flex} edges={['top']}>
