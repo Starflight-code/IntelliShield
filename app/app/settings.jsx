@@ -5,29 +5,13 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import ToggleButton from "../components/ToggleButton.jsx"
 
-
-const PanicButton = () => {
+const Settings = () => {
   const [sendNotificationBeforeAlert, setSendNotificationBeforeAlert] = useState(false);
   const [safetyCheckIns, setSafetyCheckIns] = useState(false);
   const [webLocationAccess, setWebLocationAccess] = useState(false);
   const [safetyProSupressed, setSafetyProSupressed] = useState(false);
-
-  const toggleSendBeforeAlert = () => {
-    setSendNotificationBeforeAlert(!sendNotificationBeforeAlert);
-  };
-
-  const toggleSafetyCheckIns = () => {
-    setSafetyCheckIns(!safetyCheckIns);
-  };
-
-  const toggleWebLocationAccess = () => {
-    setWebLocationAccess(!webLocationAccess);
-  };
-
-  const toggleSafetyPro = () => {
-    setSafetyProSupressed(!safetyProSupressed);
-  };
 
   return (
     <View style={styles.container}>
@@ -35,50 +19,10 @@ const PanicButton = () => {
         <Text style={styles.title}>Settings</Text>
       </View>
 
-      <View style={styles.confirmContainer}>
-        <Text style={styles.label}>Send Notification Before Alert</Text>
-        <TouchableOpacity
-          style={[styles.toggleButton]}
-          onPress={toggleSendBeforeAlert}
-        >
-          <Text style={[styles.toggleText]}>
-            {sendNotificationBeforeAlert ? "Yes" : "No"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.confirmContainer}>
-        <Text style={styles.label}>Safety Check-Ins</Text>
-        <TouchableOpacity
-          style={[styles.toggleButton]}
-          onPress={toggleSafetyCheckIns}
-        >
-          <Text style={[styles.toggleText]}>
-            {safetyCheckIns ? "Yes" : "No"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.confirmContainer}>
-        <Text style={styles.label}>Web Location Access</Text>
-        <TouchableOpacity
-          style={[styles.toggleButton]}
-          onPress={toggleWebLocationAccess}
-        >
-          <Text style={[styles.toggleText]}>
-            {webLocationAccess ? "On" : "Off"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.confirmContainer}>
-        <Text style={styles.label}>{"Safety Pro++ \nMembership Reminders"}</Text>
-        <TouchableOpacity
-          style={[styles.toggleButton]}
-          onPress={toggleSafetyPro}
-        >
-          <Text style={[styles.toggleText]}>
-            {safetyProSupressed ? "I'm Missing Out" : "Remind Me \nTomorrow"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <ToggleButton text={"Send Notification Before Alert"} buttonText={["No", "Yes"]} state={sendNotificationBeforeAlert} setState={setSendNotificationBeforeAlert} />
+      <ToggleButton text={"Safety Check-Ins"} buttonText={["No", "Yes"]} state={safetyCheckIns} setState={setSafetyCheckIns} />
+      <ToggleButton text={"Web Location Access"} buttonText={["Off", "On"]} state={webLocationAccess} setState={setWebLocationAccess} />
+      <ToggleButton text={"Safety Pro++ \nMembership Reminders"} buttonText={["Remind Me \nTomorrow", "I'm Missing Out"]} state={safetyProSupressed} setState={setSafetyProSupressed} />
       <View style={styles.confirmContainer}>
         <TouchableOpacity>
           <Text>Privacy Policy</Text>
@@ -136,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PanicButton;
+export default Settings;

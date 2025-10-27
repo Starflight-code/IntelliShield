@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-nati
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import alert_entries from '../assets/alert_entries'
 
-function AlertCard({ type, severity, use_key }) {
-  return (<View key={use_key} style={styles.wrapper}>
+function AlertCard({ type, severity }) {
+  return (<View style={styles.wrapper}>
     <Text style={[styles.h2, { fontWeight: "bold" }]}>{type}</Text>
     <Text style={styles.h3}>{`Severity: ${severity}`} </Text>
   </View>
@@ -21,7 +21,7 @@ const alerts = () => {
         <ScrollView>
           {alert_entries.map((alert) => {
             return (
-              <AlertCard type={alert["type"]} severity={alert["severity"]} use_key={iter++} />
+              <AlertCard type={alert["type"]} severity={alert["severity"]} key={iter++} />
             )
           })}
         </ScrollView>
