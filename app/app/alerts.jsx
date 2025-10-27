@@ -11,11 +11,11 @@ function AlertCard({ type, severity, use_key }) {
 }
 
 const alerts = () => {
-  let iter = 0;
+  let iter = 1;
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.flex} edges={['top']}>
-        <Text style={[styles.h1, { textAlign: "center" }]}>
+        <Text key={0} style={[styles.h1, { textAlign: "center" }]}>
           Alerts
         </Text>
         <ScrollView>
