@@ -33,7 +33,12 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+        {
+          "root": "./screens"
+        }
+      ]
     ]
   }
 }
