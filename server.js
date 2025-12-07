@@ -30,6 +30,39 @@ app.get('/users', (req, res) => {
   }
 });
 
+app.post('/me', (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    const testCredentials = {
+      'test@intellishield.com': 'password123'
+    };
+
+    if (testCredentials[email] !== password) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const users = getUsersData();
+    const user = users[0] || null;
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      email: email,
+      ...user
+    });
+  } catch (error) {
+    console.error('Error in POST /me:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`GET /users endpoint available at http://localhost:${PORT}/users`);
