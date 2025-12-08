@@ -1,7 +1,6 @@
 window.addEventListener("load", async () => {
   let people_col = document.getElementById("people-list");
-  let contacts = await fetch("./data.json");
-  let contacts_json = await contacts.json();
+  let contacts_json = await fetchUsers();
 
   for (let contact of contacts_json) {
     let div = document.createElement("div");

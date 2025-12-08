@@ -59,6 +59,10 @@ const HomePage = () => {
     router.push('/alerts');
   };
 
+  const handleUsers = () => {
+    router.push('/users');
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.assignmentHeader}>
@@ -86,6 +90,9 @@ const HomePage = () => {
 
           <TouchableOpacity style={[styles.settingsBox, {marginRight: 10}]} onPress={handleAlerts}>
             <Text style={styles.settingsText}>Alerts</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.settingsBox, {marginRight: 10}]} onPress={handleUsers}>
+            <Text style={styles.settingsText}>Users</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.settingsBox} onPress={handleSettings}>
             <Text style={styles.settingsText}>Settings</Text>

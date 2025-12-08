@@ -36,8 +36,7 @@ window.addEventListener("load", async () => {
     }
   });
 
-  let contacts = await fetch("./data.json");
-  let contacts_json = await contacts.json();
+  let contacts_json = await fetchUsers();
   let contact_list = document.getElementById("emergency-contact-list");
   for (let contact of contacts_json) {
     let li = document.createElement("li");

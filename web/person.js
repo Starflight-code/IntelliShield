@@ -1,8 +1,7 @@
 window.addEventListener("load", async () => {
   let username = window.location.href.split("#")[1];
 
-  let contacts = await fetch("./data.json");
-  let contacts_json = await contacts.json();
+  let contacts_json = await fetchUsers();
   let current_user = null;
 
   for (let contact of contacts_json) {
