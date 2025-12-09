@@ -2,13 +2,7 @@ class AuthManager {
   constructor() {
     this.sessionCookieName = 'intellishield_session';
     this.sessionExpiryDays = 7;
-
-    this.testCredentials = { // Over here we have our hardcoded credentials to test the login functionality
-      'test@intellishield.com': 'password123'
-    };
-
     this.activeSessions = new Map();
-
     this.init();
   }
 
@@ -92,7 +86,7 @@ class AuthManager {
     return session ? session.user : null;
   }
 
-  handleLogin(event) {
+  async handleLogin(event) {
     event.preventDefault();
 
     const email = document.getElementById('email').value;
@@ -101,25 +95,28 @@ class AuthManager {
 
     errorMessage.classList.add('d-none');
 
-    if (this.validateCredentials(email, password)) {
-      this.createSession(email);
+    if (!email || !password) {
+      this.showError('Email and password are required');
+      return;
+    }
+
+    try {
+      const user = await postMe(email, password);
+      this.createSession(email, user);
       this.redirectAfterLogin();
-    } else {
-      this.showError('Invalid email or password');
+    } catch (err) {
+      const message = err?.message || 'Invalid email or password';
+      this.showError(message);
     }
   }
 
-  validateCredentials(email, password) {
-    return this.testCredentials[email] === password;
-  }
-
-  createSession(email) {
+  createSession(email, userData) {
     const sessionId = this.generateSessionId();
     const expires = new Date();
     expires.setTime(expires.getTime() + (this.sessionExpiryDays * 24 * 60 * 60 * 1000));
 
     const sessionData = {
-      user: email,
+      user: userData || email,
       created: new Date().toISOString(),
       expires: expires.toISOString()
     };
@@ -127,8 +124,6 @@ class AuthManager {
     this.activeSessions.set(sessionId, sessionData);
     this.setCookie(this.sessionCookieName, sessionId, this.sessionExpiryDays);
     this.setCookie('intellishield_session_data', JSON.stringify(sessionData), this.sessionExpiryDays);
-
-    console.log(`Session created for user: ${email}`);
   }
 
   logout() {
@@ -195,7 +190,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const user = window.authManager.getCurrentUser();
     const userDisplay = document.getElementById('userDisplay');
     if (userDisplay && user) {
-      userDisplay.textContent = user;
+        const email = typeof user === 'string' ? user : (user.email || user.username || 'User');
+        userDisplay.textContent = email;
+        if (typeof fetchMe === 'function') {
+          fetchMe(email).then((fetched) => {
+            if (fetched && userDisplay) {
+              userDisplay.textContent = fetched.email || fetched.username || email;
+            }
+          }).catch(() => {});
+        }
     }
   }
 });
+

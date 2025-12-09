@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { postMe } from '../config/api';
 
 const { width } = Dimensions.get('window');
 
@@ -18,11 +19,6 @@ const Index = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  const TEST_CREDENTIALS = {  // hardcoded credentials to test the login functionality 
-    email: 'test@intellishield.com',
-    password: 'password123',
-  };
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -38,21 +34,22 @@ const Index = () => {
 
     setIsLoading(true);
 
-    setTimeout(() => {
-      if (email === TEST_CREDENTIALS.email && password === TEST_CREDENTIALS.password) {
-        Alert.alert('Success', 'Login successful!', [
-          {
-            text: 'OK',
-            onPress: () => {
-              router.replace('/home');
-            },
+    try {
+      await postMe(email, password);
+      Alert.alert('Success', 'Login successful!', [
+        {
+          text: 'OK',
+          onPress: () => {
+            router.replace('/home');
           },
-        ]);
-      } else {
-        Alert.alert('Error', 'Invalid email or password');
-      }
+        },
+      ]);
+    } catch (err) {
+      const message = err?.message || 'Invalid email or password';
+      Alert.alert('Error', message);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

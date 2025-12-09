@@ -14,5 +14,43 @@ export const fetchUsers = async () => {
   }
 };
 
+export const fetchMe = async (email) => {
+  try {
+    const url = email ? `${API_BASE_URL}/me?email=${encodeURIComponent(email)}` : `${API_BASE_URL}/me`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const user = await response.json();
+    return user;
+  } catch (error) {
+    console.error('Error fetching current user from API:', error);
+    throw error;
+  }
+};
+
+export const postMe = async (email, password) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/me`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!response.ok) {
+      let message = `HTTP error! status: ${response.status}`;
+      try {
+        const body = await response.json();
+        if (body?.error) message = body.error;
+      } catch (_) {}
+      throw new Error(message);
+    }
+    const user = await response.json();
+    return user;
+  } catch (error) {
+    console.error('Error posting /me to API:', error);
+    throw error;
+  }
+};
+
 export default API_BASE_URL;
 
