@@ -54,6 +54,7 @@ async function connectToMongoDB() {
 //   }
 // }
 
+// this has been entered to the DB manually and this is no longer required. you can delete this after reading this comment.
 // function getUsersDataFromFile() {
 //   try {
 //     const dataPath = path.join(__dirname, '..', 'web', 'data.json');
@@ -114,7 +115,9 @@ app.post("/settings", async (req, res) => {
   }
 })
 
-// this route should grab the user state for the current user (normally this would reference the session key to find this but you can just hardcode a "current" user)
+// this route should grab/set the user state for the current user (normally 
+// this would reference the session key to find this but you can just use 
+// the hardcoded "current" user WHO_AM_I)
 app.post('/me', async (req, res) => {
   try {
     const { email, password } = req.body;
