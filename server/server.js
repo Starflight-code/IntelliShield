@@ -13,12 +13,16 @@ const __dirname = path.dirname(__filename);
 
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017';
 const DB_NAME = process.env.DB_NAME || 'intellishield';
-const COLLECTION_NAME = 'users';
+// const COLLECTION_NAME = 'users';
 
 const client = new MongoClient(MONGO_URL);
 
 let db;
 let usersCollection;
+
+// mount static directory to endpoint prefix static. (e.g. file under static "./static/img.png" can be requested with a GET request targeting BASE/static/img.png)
+// please place images in /static/images/ and link to this directory
+app.use('/static', express.static('static'))
 
 async function connectToMongoDB() {
   try {
