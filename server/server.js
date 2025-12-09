@@ -8,8 +8,8 @@ import { MongoClient, ObjectId } from 'mongodb'
 
 dotenv.config()
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017';
 const DB_NAME = process.env.DB_NAME || 'intellishield';
@@ -18,53 +18,15 @@ const WHO_AM_I = "6937a91d72fe8fe0a23e66ae";
 
 const client = new MongoClient(MONGO_URL);
 
-let db;
-
 // mount static directory to endpoint prefix static. (e.g. file under static "./static/img.png" can be requested with a GET request targeting BASE/static/img.png)
 // please place images in /static/images/ and link to this directory
 app.use('/static', express.static('static'))
 
 async function connectToMongoDB() {
-  if (db) return db;
   await client.connect();
   db = client.db(DB_NAME);
   return db;
 }
-
-// generic functions should not perform route specific behaviors
-// async function connectToMongoDB() {
-//   try {
-//     await client.connect();
-//     console.log('Connected to MongoDB');
-//     db = client.db(DB_NAME);
-//     usersCollection = db.collection(COLLECTION_NAME);
-//     
-//     const userCount = await usersCollection.countDocuments();
-//     if (userCount === 0) {
-//       console.log('Seeding initial user data...');
-//       const initialData = getUsersDataFromFile();
-//       if (initialData.length > 0) {
-//         await usersCollection.insertMany(initialData);
-//         console.log(`Inserted ${initialData.length} users into MongoDB`);
-//       }
-//     }
-//   } catch (error) {
-//     console.error('Error connecting to MongoDB:', error);
-//     throw error;
-//   }
-// }
-
-// this has been entered to the DB manually and this is no longer required. you can delete this after reading this comment.
-// function getUsersDataFromFile() {
-//   try {
-//     const dataPath = path.join(__dirname, '..', 'web', 'data.json');
-//     const data = fs.readFileSync(dataPath, 'utf8');
-//     return JSON.parse(data);
-//   } catch (error) {
-//     console.error('Error reading data.json:', error);
-//     return [];
-//   }
-// }
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -105,34 +67,6 @@ app.get('/me', async (req, res) => {
   }
 });
 
-app.get("/settings", async (req, res) => {
-  try {
-    const database = await connectToMongoDB();
-    const collection = database.collection("settings");
-    const settings = await collection.findOne({ _id: new ObjectId(WHO_AM_I) });
-
-    return res.send(settings);
-  }
-  catch (error) {
-    console.error('Error fetching settings for current user: ', error)
-    res.status(500).json({ error: 'Generic Exception' })
-  }
-})
-
-app.post("/settings", async (req, res) => {
-  try {
-    const database = await connectToMongoDB();
-    const collection = database.collection("settings");
-    await collection.updateOne({ _id: new ObjectId(WHO_AM_I) }, req.body);
-
-    return res.statusCode(200).json({ message: "ok" });
-  }
-  catch (error) {
-    console.error('Error updating settings for current user: ', error)
-    res.status(500).json({ error: 'Generic Exception' })
-  }
-})
-
 // this route should grab/set the user state for the current user (normally 
 // this would reference the session key to find this but you can just use 
 // the hardcoded "current" user WHO_AM_I)
@@ -168,6 +102,48 @@ app.post('/me', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+app.get("/updates", async (req, res) => {
+  const database = await connectToMongoDB();
+  const collection = database.collection("updates");
+  const updates = await collection.find({ userId: new ObjectId(WHO_AM_I) });
+  res.json(updates);
+});
+
+app.post("/updates", async (req, res) => {
+  const database = await connectToMongoDB();
+  const collection = database.collection("updates");
+  await collection.insertOne(JSON.parse(res.body));
+  res.json({ "message": "ok" }).status(200);
+});
+
+app.get("/settings", async (req, res) => {
+  try {
+    const database = await connectToMongoDB();
+    const collection = database.collection("settings");
+    const settings = await collection.findOne({ userId: new ObjectId(WHO_AM_I) });
+
+    return res.send(settings);
+  }
+  catch (error) {
+    console.error('Error fetching settings for current user: ', error)
+    res.status(500).json({ error: 'Generic Exception' })
+  }
+})
+
+app.post("/settings", async (req, res) => {
+  try {
+    const database = await connectToMongoDB();
+    const collection = database.collection("settings");
+    await collection.updateOne({ userId: new ObjectId(WHO_AM_I) }, req.body);
+
+    return res.statusCode(200).json({ message: "ok" });
+  }
+  catch (error) {
+    console.error('Error updating settings for current user: ', error)
+    res.status(500).json({ error: 'Generic Exception' })
+  }
+})
 
 connectToMongoDB()
   .then(() => {
